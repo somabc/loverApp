@@ -1,20 +1,25 @@
 'use strict';
 
-app.factory('Auth', function($firebaseAuth, $firebaseObject, $state) {
-    var auth = $firebaseAuth();
+app.factory('Auth', function(FURL, $firebaseAuth, $firebaseObject, $state) {
+
+    var ref = new Firebase(FURL);
+    var auth = $firebaseAuth(ref);
 
     var Auth = {
         login: function() {
-            return auth.$signInWithPopup('facebook');
+            return auth.$authWithOAuthPopup('facebook', {
+                remember: "sessionOnly",
+                scope: "public_profile, email, user_location, user_birthday, user_photos, user_about_me"
+            });
         },
 
         logout: function() {
-            return auth.$signOut();
+            return auth.$unauth();
         }       
 
     };
 
-    auth.$onAuthStateChanged(function(authData) {
+    auth.$onAuth(function(authData) {
         if(authData) {
             console.log('Logged in!');
         } else {
