@@ -4,7 +4,17 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic'])
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDfB00VdE9Ut4Lb8ne9uCa-HqwM_A_7v0A",
+    authDomain: "somloverapp.firebaseapp.com",
+    databaseURL: "https://somloverapp.firebaseio.com",
+    storageBucket: "somloverapp.appspot.com",
+    messagingSenderId: "516665192214"
+  };
+  firebase.initializeApp(config);
+
+var app = angular.module('starter', ['ionic', 'firebase'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -21,6 +31,8 @@ angular.module('starter', ['ionic'])
     }
   });
 })
+
+.constant('FURL', 'https://somloverapp.firebaseio.com' )
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
