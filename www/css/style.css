@@ -5,11 +5,10 @@
 	color: #FFF;
 	font-weight: 500;
 	padding-bottom: 30px;
-
 }
 
 .item-menu.item.item-complex {
-	border: none !important!;
+	border: none !important;
 }
 
 .menu.menu-left {
@@ -19,7 +18,7 @@
 
 .icon-menu.icon {
 	font-size: 25px;
-	margin-right:10px;
+	margin-right: 10px;
 	border: 2px solid;
 	padding-left: 5px;
 	padding-right: 5px;

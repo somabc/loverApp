@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic',])
+angular.module('starter', ['ionic'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -25,7 +25,7 @@ angular.module('starter', ['ionic',])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
-    .state('app', {
+  .state('app', {
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html'
@@ -33,7 +33,7 @@ angular.module('starter', ['ionic',])
 
   .state('login', {
     url: '/login',
-        templateUrl: 'templates/login.html'
+    templateUrl: 'templates/login.html'
   })
 
   .state('app.profile', {
@@ -45,7 +45,6 @@ angular.module('starter', ['ionic',])
     }
   })
 
-
   .state('app.home', {
     url: '/home',
     views: {
@@ -56,14 +55,14 @@ angular.module('starter', ['ionic',])
   })
 
   .state('app.settings', {
-   url: '/settings',
+    url: '/settings',
     views: {
       'menuContent': {
         templateUrl: 'templates/settings.html'
       }
     }
-});
-
+  });
+  
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
 });
