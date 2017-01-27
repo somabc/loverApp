@@ -32,7 +32,7 @@ var app = angular.module('starter', ['ionic', 'firebase'])
   });
 })
 
-.constant('FURL', 'https://somloverapp.firebaseio.com' )
+.constant('FURL', 'https://somloverapp.firebaseio.com')
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider

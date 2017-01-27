@@ -8,7 +8,7 @@ app.controller('AuthCtrl', function(Auth) {
         console.log('Login clicked');
         
         return Auth.login().then(function(user) {
-            console.log(user.facebook);
+            console.log(result.user);
         });
         
     };
