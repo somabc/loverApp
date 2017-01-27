@@ -46,6 +46,7 @@ var app = angular.module('starter', ['ionic', 'firebase'])
   .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html'
+    controller: 'AuthCtrl as auth'
   })
 
   .state('app.profile', {
