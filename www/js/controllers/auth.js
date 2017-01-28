@@ -16,4 +16,4 @@ app.controller('AuthCtrl', function(Auth, $state) {
     auth.logout = function() {
         Auth.logout();
     };
-});ß
+});
