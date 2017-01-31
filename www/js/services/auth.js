@@ -55,7 +55,15 @@ app.factory('Auth', function($firebaseAuth, $firebaseObject, $state, $http, $q) 
 
         logout: function() {
             return auth.$signOut();
-        }       
+        },
+
+        getAge: function(birthday) {
+            return new Date().getFullYear() - new Date(birthday).getFullYear();
+        },
+
+        requireAuth: function() {
+            return auth.$requireSignIn();
+        }
 
     };
 
