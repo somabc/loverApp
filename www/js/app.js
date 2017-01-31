@@ -1,5 +1,9 @@
+// Ionic Starter App
 
-
+// angular.module is a global place for creating, registering and retrieving Angular modules
+// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
+// the 2nd parameter is an array of 'requires'
+// 'starter.controllers' is found in controllers.js
 var app = angular.module('starter', ['ionic', 'firebase'])
 
 .run(function($ionicPlatform) {
@@ -17,6 +21,8 @@ var app = angular.module('starter', ['ionic', 'firebase'])
     }
   });
 })
+
+.constant('FURL', 'https://lovermobile.firebaseio.com/')
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
@@ -50,6 +56,26 @@ var app = angular.module('starter', ['ionic', 'firebase'])
             return Auth.requireAuth().then(function(auth) {
               return Auth.getProfile(auth.uid).$loaded();
             });
+          },
+
+          about: function(Auth) {
+            return Auth.requireAuth()
+              .then(function(auth) {
+                return Auth.getAbout(auth.facebook.accessToken);
+              })
+              .then(function(object) {
+                return object.data.bio;
+              });
+          },
+
+          images: function(Auth) {
+            return Auth.requireAuth()
+              .then(function(auth) {
+                return Auth.getImages(auth.facebook.accessToken);
+              })
+              .then(function(object) {
+                return object.data.data;
+              });
           }
         }
       }
@@ -69,18 +95,19 @@ var app = angular.module('starter', ['ionic', 'firebase'])
     url: '/settings',
     views: {
       'menuContent': {
-        templateUrl: 'templates/settings.html'
-        resolve{
+        templateUrl: 'templates/settings.html',
+        controller: 'SettingCtrl as sett',
+        resolve: {
           auth: function($state, Auth) {
             return Auth.requireAuth().catch(function() {
               $state.go('login');
             });
-          },
+          }
         }
       }
     }
   });
-
+  
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
 });

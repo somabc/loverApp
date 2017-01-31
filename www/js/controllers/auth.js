@@ -2,18 +2,18 @@
 
 app.controller('AuthCtrl', function(Auth, $state) {
 
-    var auth = this;
+	var auth = this;
 
-    auth.login = function() {
-        console.log('Login clicked');
+	auth.login = function() {
+		console.log('Login cliked');
+		
+		return Auth.login().then(function(user) {
+			$state.go('app.home');
+		});
+		
+	};
 
-        return Auth.login().then(function(result) {
-            $state.go('app.home');
-        });
-
-    };
-
-    auth.logout = function() {
-        Auth.logout();
-    };
+	auth.logout = function() {
+		Auth.logout();
+	};
 });
