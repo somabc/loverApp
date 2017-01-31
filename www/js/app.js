@@ -1,9 +1,5 @@
-// Ionic Starter App
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.controllers' is found in controllers.js
+
 var app = angular.module('starter', ['ionic', 'firebase'])
 
 .run(function($ionicPlatform) {
@@ -21,8 +17,6 @@ var app = angular.module('starter', ['ionic', 'firebase'])
     }
   });
 })
-
-.constant('FURL', 'https://lovermobile.firebaseio.com/')
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
@@ -43,7 +37,21 @@ var app = angular.module('starter', ['ionic', 'firebase'])
     url: '/profile',
     views: {
       'menuContent': {
-        templateUrl: 'templates/profile.html'
+        templateUrl: 'templates/profile.html',
+        controller: 'ProfileCtrl as prof',
+        resolve: {
+          auth: function($state, Auth) {
+            return Auth.requireAuth().catch(function() {
+              $state.go('login');
+            });
+          },
+
+          profile: function(Auth) {
+            return Auth.requireAuth().then(function(auth) {
+              return Auth.getProfile(auth.uid).$loaded();
+            });
+          }
+        }
       }
     }
   })
@@ -62,10 +70,17 @@ var app = angular.module('starter', ['ionic', 'firebase'])
     views: {
       'menuContent': {
         templateUrl: 'templates/settings.html'
+        resolve{
+          auth: function($state, Auth) {
+            return Auth.requireAuth().catch(function() {
+              $state.go('login');
+            });
+          },
+        }
       }
     }
   });
-  
+
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
 });
